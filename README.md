@@ -18,3 +18,17 @@ Calculadora de derivadas simbólicas para funciones:
 - Teorema del Valor Medio
 
 ## 📁 Estructura del proyecto
+CalculadoraDerivadas/
+├── src/
+│ └── Main.java
+└── README.md
+
+text
+
+## 👨‍💻 Autor
+Leandro - Estudiante de Ingeniería Informática (Preparación UCI)
+
+## 📅 Estado
+✅ Funciones lineales y cuadráticas  
+✅ Funciones racionales  
+🔜 Polinomios de cualquier grado
