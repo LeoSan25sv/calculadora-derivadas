@@ -17,12 +17,6 @@ Calculadora de derivadas simbólicas para funciones:
 - Derivación implícita
 - Teorema del Valor Medio
 
-## 📁 Estructura del proyecto
-CalculadoraDerivadas/
-├── src/
-│ └── Main.java
-└── README.md
-
 text
 
 ## 👨‍💻 Autor
