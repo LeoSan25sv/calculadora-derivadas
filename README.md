@@ -1,7 +1,7 @@
 # Calculadora de Derivadas en Java
 
 ## 📚 Descripción
-Calculadora de derivadas simbólicas para funciones:
+Calculadora de calculadoraderivas simbólicas para calculadoraderivas.funciones:
 - Lineales: f(x) = mx + n
 - Cuadráticas: f(x) = ax² + bx + c  
 - Racionales: f(x) = (ax² + bx + c)/(mx + n)

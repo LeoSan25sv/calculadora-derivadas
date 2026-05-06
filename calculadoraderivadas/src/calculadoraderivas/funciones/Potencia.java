@@ -1,8 +1,13 @@
+package calculadoraderivas.funciones;
+
+import calculadoraderivas.Funcion;
+import calculadoraderivas.Polinomio;
+
 /**
  * Representa una función potencia: f(x) = [u(x)]^n.
  *
  * @author Estudiante UCI
- * @version 2.0 (POO)
+ * @version 2.1 (POO)
  */
 public class Potencia implements Funcion {
     private final Polinomio base;
@@ -89,4 +94,6 @@ public class Potencia implements Funcion {
         return sb.toString();
     }
 }
+
+
 

@@ -1,3 +1,10 @@
+package calculadoraderivas;
+
+import calculadoraderivas.funciones.Lineal;
+import calculadoraderivas.funciones.Polinomica;
+import calculadoraderivas.funciones.Potencia;
+import calculadoraderivas.funciones.Racional;
+
 import java.util.Scanner;
 
 /**
@@ -5,34 +12,40 @@ import java.util.Scanner;
  * Separada de la lógica de negocio.
  *
  * @author Estudiante UCI
- * @version 2.0 (POO)
+ * @version 2.1 (POO)
  */
 public class InterfazUsuario {
     private final Scanner scanner;
 
+    /**
+     *
+     * Constructor de la clase
+     *
+     */
     public InterfazUsuario() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Muestra el menú principal.
+     *
+     * Metodo de instancia para mostrar menú
+     *
      */
     public void mostrarMenu() {
         System.out.println("=== CALCULADORA DE DERIVADAS ===");
         System.out.println("Funciones Disponibles");
-        System.out.println("1. f(x) = mx + n\n");
-        System.out.println("2. f(x) = polinomio\n");
-        System.out.println("3. f(x) = p(x)/q(x)\n");
+        System.out.println("1. f(x) = mx + n");
+        System.out.println("2. f(x) = polinomio");
+        System.out.println("3. f(x) = p(x)/q(x)");
         System.out.println("4. f(x) = u(x)^n\n");
     }
 
     /**
-     * Lee la opción del usuario.
-     *
-     * @return Opción seleccionada (1-4)
+     * Metodo de instancia para tomar entrada de Usuario con la opción deseada
+     * @return Número de la opcion deseada
      */
-    public int leerOpcion() {
-        System.out.print("Introduzca el número correspondiente: ");
+    public int leerOpcion(){
+        System.out.print("Introduzca el número correspondiente a la opción deseada: ");
         return scanner.nextInt();
     }
 
@@ -42,20 +55,14 @@ public class InterfazUsuario {
      * @param opcion Opción del menú (1-4)
      * @return La función creada
      */
-    public Funcion crearFuncion(int opcion) {
-        switch (opcion) {
-            case 1:
-                return crearFuncionLineal();
-            case 2:
-                return crearFuncionPolinomica();
-            case 3:
-                return crearFuncionRacional();
-            case 4:
-                return crearFuncionPotencia();
-            default:
-                System.out.println("Opción no válida");
-                return null;
-        }
+    public Funcion llamarFuncion(int opcion) {
+        return switch (opcion) {
+            case 1 -> funcionLineal();
+            case 2 -> funcionPolinomica();
+            case 3 -> funcionRacional();
+            case 4 -> funcionPotencia();
+            default -> null;
+        };
     }
 
     /**
@@ -65,20 +72,19 @@ public class InterfazUsuario {
      * @param df Derivada
      */
     public void mostrarResultado(Funcion f, Funcion df) {
-        System.out.println("\n==========================================================");
+        System.out.println("\n==============================");
         System.out.println("f(x) = " + f);
 
-        if (df instanceof Potencia) {
-            Potencia p = (Potencia) df;
+        if (df instanceof Potencia p) {
             System.out.println("f'(x) = " + p.derivadaToString());
         } else {
             System.out.println("f'(x) = " + df);
         }
     }
 
-    // ========== MÉTODOS PRIVADOS DE CREACIÓN ==========
+    // ========== MÉTODOS PRIVADOS ==========
 
-    private Funcion crearFuncionLineal() {
+    private Funcion funcionLineal() {
         System.out.println("\n--- DERIVAR FUNCIÓN LINEAL (f(x) = mx + n) ---\n");
         System.out.print("Introduzca m: ");
         int m = scanner.nextInt();
@@ -87,7 +93,7 @@ public class InterfazUsuario {
         return new Lineal(m, n);
     }
 
-    private Funcion crearFuncionPolinomica() {
+    private Funcion funcionPolinomica() {
         System.out.println("\n--- DERIVAR FUNCIÓN POLINÓMICA ---\n");
         System.out.print("Número de términos: ");
         int numTerminos = scanner.nextInt();
@@ -109,7 +115,7 @@ public class InterfazUsuario {
         return new Polinomica(terminos);
     }
 
-    private Funcion crearFuncionRacional() {
+    private Funcion funcionRacional() {
         System.out.println("\n--- DERIVAR FUNCIÓN RACIONAL ---\n");
 
         System.out.println("---- Numerador p(x) ----");
@@ -149,7 +155,7 @@ public class InterfazUsuario {
         return new Racional(pTerms, qTerms);
     }
 
-    private Funcion crearFuncionPotencia() {
+    private Funcion funcionPotencia() {
         System.out.println("\n--- DERIVAR FUNCIÓN POTENCIA f(x) = u(x)^n ---\n");
 
         System.out.println("---- Base u(x) ----");

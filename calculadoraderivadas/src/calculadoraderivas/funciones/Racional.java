@@ -1,8 +1,14 @@
+package calculadoraderivas.funciones;
+
+
+import calculadoraderivas.Funcion;
+import calculadoraderivas.Polinomio;
+
 /**
  * Representa una función racional: f(x) = p(x)/q(x).
  *
  * @author Estudiante UCI
- * @version 2.0 (POO)
+ * @version 2.1 (POO)
  */
 public class Racional implements Funcion {
     private final Polinomio numerador;
@@ -11,8 +17,8 @@ public class Racional implements Funcion {
     /**
      * Constructor de función racional.
      *
-     * @param numerador Polinomio del numerador
-     * @param denominador Polinomio del denominador
+     * @param numerador Funciones.derivadas.Polinomio del numerador
+     * @param denominador Funciones.derivadas.Polinomio del denominador
      */
     public Racional(Polinomio numerador, Polinomio denominador) {
         this.numerador = numerador;

@@ -1,3 +1,5 @@
+package calculadoraderivas;
+
 /**
  * Calculadora de Derivadas - Versión Orientada a Objetos.
  *
@@ -5,7 +7,7 @@
  * Separa claramente la interfaz de usuario de la lógica de negocio.</p>
  *
  * @author Estudiante UCI
- * @version 2.0 (POO)
+ * @version 2.1 (POO)
  */
 public class CalculadoraDerivadas {
 
@@ -20,7 +22,7 @@ public class CalculadoraDerivadas {
             return;
         }
 
-        Funcion f = ui.crearFuncion(opcion);
+        Funcion f = ui.llamarFuncion(opcion);
 
         if (f == null) {
             System.out.println("Error al crear la función");

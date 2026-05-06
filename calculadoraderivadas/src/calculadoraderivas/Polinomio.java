@@ -1,3 +1,5 @@
+package calculadoraderivas;
+
 import java.util.*;
 
 /**
@@ -5,10 +7,10 @@ import java.util.*;
  * Los términos se agrupan automáticamente por exponente.
  *
  * @author Estudiante UCI
- * @version 2.0 (POO)
+ * @version 2.1 (POO)
  */
 public class Polinomio {
-    private Map<Integer, Integer> terminos;  // exponente → coeficiente
+    private final Map<Integer, Integer> terminos;  // exponente → coeficiente
 
     /**
      * Constructor: crea un polinomio vacío.
@@ -25,7 +27,7 @@ public class Polinomio {
     public Polinomio(int[][] terms) {
         this();
         for (int[] t : terms) {
-            añadirTermino(t[0], t[1]);
+            agregarTermino(t[0], t[1]);
         }
     }
 
@@ -36,7 +38,7 @@ public class Polinomio {
      */
     public Polinomio(Termino t) {
         this();
-        añadirTermino(t);
+        agregarTermino(t);
     }
 
     // ========== MÉTODOS PÚBLICOS ==========
@@ -47,7 +49,7 @@ public class Polinomio {
      * @param coeficiente Coeficiente del término
      * @param exponente Exponente del término
      */
-    public void añadirTermino(int coeficiente, int exponente) {
+    public void agregarTermino(int coeficiente, int exponente) {
         if (coeficiente == 0) return;
 
         terminos.merge(exponente, coeficiente, Integer::sum);
@@ -63,8 +65,8 @@ public class Polinomio {
      *
      * @param termino Término a añadir
      */
-    public void añadirTermino(Termino termino) {
-        añadirTermino(termino.getCoeficiente(), termino.getExponente());
+    public void agregarTermino(Termino termino) {
+        agregarTermino(termino.getCoeficiente(), termino.getExponente());
     }
 
     /**
@@ -87,7 +89,7 @@ public class Polinomio {
             int coef = entry.getValue();
 
             if (exp != 0) {
-                derivada.añadirTermino(coef * exp, exp - 1);
+                derivada.agregarTermino(coef * exp, exp - 1);
             }
         }
 
@@ -97,7 +99,7 @@ public class Polinomio {
     /**
      * Suma este polinomio con otro.
      *
-     * @param otro Polinomio a sumar
+     * @param otro Funciones.derivadas.Polinomio a sumar
      * @return Nuevo polinomio resultado de la suma
      */
     public Polinomio sumar(Polinomio otro) {
@@ -105,12 +107,12 @@ public class Polinomio {
 
         // Añadir términos de este polinomio
         for (Map.Entry<Integer, Integer> entry : this.terminos.entrySet()) {
-            resultado.añadirTermino(entry.getValue(), entry.getKey());
+            resultado.agregarTermino(entry.getValue(), entry.getKey());
         }
 
         // Añadir términos del otro polinomio
         for (Map.Entry<Integer, Integer> entry : otro.terminos.entrySet()) {
-            resultado.añadirTermino(entry.getValue(), entry.getKey());
+            resultado.agregarTermino(entry.getValue(), entry.getKey());
         }
 
         return resultado;
@@ -119,18 +121,18 @@ public class Polinomio {
     /**
      * Resta otro polinomio de este (this - otro).
      *
-     * @param otro Polinomio a restar
+     * @param otro Funciones.derivadas.Polinomio a restar
      * @return Nuevo polinomio resultado de la resta
      */
     public Polinomio restar(Polinomio otro) {
         Polinomio resultado = new Polinomio();
 
         for (Map.Entry<Integer, Integer> entry : this.terminos.entrySet()) {
-            resultado.añadirTermino(entry.getValue(), entry.getKey());
+            resultado.agregarTermino(entry.getValue(), entry.getKey());
         }
 
         for (Map.Entry<Integer, Integer> entry : otro.terminos.entrySet()) {
-            resultado.añadirTermino(-entry.getValue(), entry.getKey());
+            resultado.agregarTermino(-entry.getValue(), entry.getKey());
         }
 
         return resultado;
@@ -139,7 +141,7 @@ public class Polinomio {
     /**
      * Multiplica este polinomio por otro.
      *
-     * @param otro Polinomio multiplicador
+     * @param otro Funciones.derivadas.Polinomio multiplicador
      * @return Nuevo polinomio producto
      */
     public Polinomio multiplicar(Polinomio otro) {
@@ -147,7 +149,7 @@ public class Polinomio {
 
         for (Map.Entry<Integer, Integer> e1 : this.terminos.entrySet()) {
             for (Map.Entry<Integer, Integer> e2 : otro.terminos.entrySet()) {
-                resultado.añadirTermino(
+                resultado.agregarTermino(
                         e1.getValue() * e2.getValue(),
                         e1.getKey() + e2.getKey()
                 );
@@ -167,7 +169,7 @@ public class Polinomio {
         Polinomio resultado = new Polinomio();
 
         for (Map.Entry<Integer, Integer> entry : terminos.entrySet()) {
-            resultado.añadirTermino(entry.getValue() * escalar, entry.getKey());
+            resultado.agregarTermino(entry.getValue() * escalar, entry.getKey());
         }
 
         return resultado;
