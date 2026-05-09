@@ -1,21 +1,21 @@
 # Calculadora de Derivadas en Java
 
 ## 📚 Descripción
-Calculadora de calculadoraderivas simbólicas para calculadoraderivas.funciones:
-- Lineales: f(x) = mx + n
-- Cuadráticas: f(x) = ax² + bx + c  
-- Racionales: f(x) = (ax² + bx + c)/(mx + n)
-- Polinomios de cualquier grado (en desarrollo)
+Calculadora de derivadas simbólicas para calcular derivadas de funciones:
+- Lineales: **f(x) = mx + n**
+- Cuadráticas: **f(x) = ax² + bx + c**  
+- Racionales: **f(x) = (ax² + bx + c) / (mx + n)**
+- Polinómicas: **f(x) = Σ a_i·x ͥ**
+- Potencias: **f(x) = [u(x)]^n**
 
 ## 🛠️ Tecnologías
 - Java
-- TextIO para entrada/salida
 
 ## 🧠 Conceptos aplicados
 - Regla del cociente
 - Regla de la potencia
-- Derivación implícita
-- Teorema del Valor Medio
+- Regla general de la potencia
+- Regla de la cadena
 
 text
 
@@ -25,4 +25,6 @@ Leandro - Estudiante de Ingeniería Informática (Preparación UCI)
 ## 📅 Estado
 ✅ Funciones lineales y cuadráticas  
 ✅ Funciones racionales  
-🔜 Polinomios de cualquier grado
+✅ Polinomios de cualquier grado  
+✅ Funciones potencia  
+🔜
