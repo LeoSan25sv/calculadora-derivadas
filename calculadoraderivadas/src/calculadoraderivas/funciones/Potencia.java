@@ -2,6 +2,7 @@ package calculadoraderivas.funciones;
 
 import calculadoraderivas.Funcion;
 import calculadoraderivas.Polinomio;
+import calculadoraderivas.derivadas.DxPotencia;
 
 /**
  * Representa una función potencia: f(x) = [u(x)]^n.
@@ -12,7 +13,6 @@ import calculadoraderivas.Polinomio;
 public class Potencia implements Funcion {
     private final Polinomio base;
     private final int exponente;
-
     /**
      * Constructor de función potencia.
      *
@@ -42,27 +42,10 @@ public class Potencia implements Funcion {
     public int getExponente() { return exponente; }
 
     @Override
-    public Funcion derivar() {
+    public DxPotencia derivar() {
         // Regla de la cadena + potencia: n·u^(n-1)·u'
         Polinomio du = base.derivar();
-        int nuevoExponente = exponente - 1;
-
-        // Si el exponente es 1, no mostramos ^1
-        String baseStr = base.toString();
-        if (nuevoExponente == 1) {
-            // La derivada se representa como n·u·u'
-            return new Racional(
-                    du.multiplicarPorEscalar(exponente),
-                    new Polinomio()  // Denominador 1
-            );
-        }
-
-        // Construimos la representación como texto (por simplicidad)
-        // En una versión más avanzada, crearíamos una clase Producto
-        return new Racional(
-                du.multiplicarPorEscalar(exponente),
-                new Polinomio()  // Denominador 1
-        );
+        return new DxPotencia(base,du,exponente);
     }
 
     @Override
@@ -75,7 +58,7 @@ public class Potencia implements Funcion {
 
     /**
      * Devuelve la representación de la derivada en formato texto.
-     * Esto es necesario porque la derivada tiene la forma n·u^(n-1)·u'
+     * Esto es necesario porque la derivada tiene la forma 'n·u^(n-1)·u'
      */
     public String derivadaToString() {
         Polinomio du = base.derivar();
@@ -94,6 +77,3 @@ public class Potencia implements Funcion {
         return sb.toString();
     }
 }
-
-
-
