@@ -5,6 +5,7 @@ import calculadoraderivas.funciones.Polinomica;
 import calculadoraderivas.funciones.Potencia;
 import calculadoraderivas.funciones.Racional;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -44,9 +45,8 @@ public class InterfazUsuario {
      * Metodo de instancia para tomar entrada de Usuario con la opción deseada
      * @return Número de la opcion deseada
      */
-    public int leerOpcion(){
-        System.out.print("Introduzca el número correspondiente a la opción deseada: ");
-        return scanner.nextInt();
+    public int leerOpcion() {
+        return leerEntero("Introduzca el número correspondiente a la opción deseada: ");
     }
 
     /**
@@ -58,7 +58,7 @@ public class InterfazUsuario {
     public Funcion llamarFuncion(int opcion) {
         return switch (opcion) {
             case 1 -> funcionLineal();
-            case 2 -> funcionPolinomica();
+            case 2 -> funcionPolinomio();
             case 3 -> funcionRacional();
             case 4 -> funcionPotencia();
             default -> null;
@@ -86,17 +86,17 @@ public class InterfazUsuario {
 
     private Funcion funcionLineal() {
         System.out.println("\n--- DERIVAR FUNCIÓN LINEAL (f(x) = mx + n) ---\n");
-        System.out.print("Introduzca m: ");
-        int m = scanner.nextInt();
-        System.out.print("Introduzca n: ");
-        int n = scanner.nextInt();
+        int m = leerEntero("Introduzca m: ");
+        int n = leerEntero("Introduzca n: ");
         return new Lineal(m, n);
     }
 
-    private Funcion funcionPolinomica() {
-        System.out.println("\n--- DERIVAR FUNCIÓN POLINÓMICA ---\n");
-        System.out.print("Número de términos: ");
-        int numTerminos = scanner.nextInt();
+    private Funcion funcionPolinomio() {
+        System.out.println("\n--- DERIVAR POLINOMIO ---\n");
+
+        scanner.nextLine();
+
+        int numTerminos = leerEntero("Número de términos: ");
 
         if (numTerminos <= 0) {
             System.out.println("Error: El número de términos debe ser positivo");
@@ -119,8 +119,7 @@ public class InterfazUsuario {
         System.out.println("\n--- DERIVAR FUNCIÓN RACIONAL ---\n");
 
         System.out.println("---- Numerador p(x) ----");
-        System.out.print("Número de términos: ");
-        int numP = scanner.nextInt();
+        int numP = leerEntero("Número de términos: ");
 
         if (numP <= 0) {
             System.out.println("Error: El número de términos debe ser positivo");
@@ -154,30 +153,77 @@ public class InterfazUsuario {
 
         return new Racional(pTerms, qTerms);
     }
-
     private Funcion funcionPotencia() {
         System.out.println("\n--- DERIVAR FUNCIÓN POTENCIA f(x) = u(x)^n ---\n");
 
-        System.out.println("---- Base u(x) ----");
-        System.out.print("Número de términos: ");
-        int numTerminos = scanner.nextInt();
+        scanner.nextLine();// 🔧 LIMPIAR EL BUFFER
 
-        if (numTerminos <= 0) {
-            System.out.println("Error: El número de términos debe ser positivo");
-            return null;
-        }
+        System.out.println("---- Paso 1: Introducir función interna u(x) ----");
 
-        int[][] uTerms = new int[numTerminos][2];
+        ArrayList<Integer> constante = new ArrayList<>();
+        ArrayList<Integer> exponente = new ArrayList<>();
+
         System.out.println("Introduce cada término (constante exponente):");
-        for (int i = 0; i < numTerminos; i++) {
-            System.out.print("Término " + (i + 1) + ": ");
-            uTerms[i][0] = scanner.nextInt();
-            uTerms[i][1] = scanner.nextInt();
+        System.out.println("Para terminar introduzca: (0 0)");
+
+        while (true) {
+            String termino = scanner.nextLine().trim(); //representa a_n ^n
+
+            if (termino.equals("0 0")) break;
+
+            int espacioIndex = termino.indexOf(' ');
+            if (espacioIndex == -1) {
+                System.out.println("Formato incorrecto. Usa: constante exponente");
+                continue;
+            }
+
+            try {
+                String consStr = termino.substring(0, espacioIndex);
+                String expStr = termino.substring(espacioIndex + 1);
+
+                int cons = Integer.parseInt(consStr);
+                int exp = Integer.parseInt(expStr);
+
+                if (cons == 0 && exp == 0) break;
+
+                constante.add(cons);
+                exponente.add(exp);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: " + termino + " no es válido. Usa números.");
+            }
         }
 
-        System.out.print("\nExponente n: ");
+        // Verificar que al menos hay un término
+        if (constante.isEmpty()) {
+            throw new IllegalStateException("No se ingresaron términos válidos");
+        }
+
+        int[][] uTerms = new int[constante.size()][2];
+        for (int i = 0; i < constante.size(); i++) {
+            uTerms[i][0] = constante.get(i);
+            uTerms[i][1] = exponente.get(i);
+        }
+
+        System.out.print("\n---- Paso 2: Introducir exponente n ----");
         int n = scanner.nextInt();
+        scanner.nextLine(); // ← limpiar el buffer DESPUÉS de leer el número
 
         return new Potencia(uTerms, n);
+    }
+
+    // metodos auxiliares
+    private int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        int valor = scanner.nextInt();
+        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
+        return valor;
+    }
+
+    private double leerDouble(String mensaje) {
+        System.out.print(mensaje);
+        double valor = scanner.nextDouble();
+        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
+        return valor;
     }
 }
