@@ -44,6 +44,49 @@ public class Polinomio {
     // ========== MÉTODOS PÚBLICOS ==========
 
     /**
+     * Evalúa el polinomio en un punto x usando el algoritmo de Horner.
+     *
+     * @param x Valor en el que evaluar
+     * @return Resultado de la evaluación
+     */
+    public double evaluar(double x) {
+        if (terminos.isEmpty()) {
+            return 0.0;
+        }
+
+        // Obtener todos los exponentes ordenados (ya están de mayor a menor)
+        Set<Integer> exponentes = terminos.keySet();
+        Iterator<Integer> it = exponentes.iterator();
+
+        // Empezamos con el coeficiente del término de mayor grado
+        int expActual = it.next();
+        double resultado = terminos.get(expActual);
+
+        // Recorremos los exponentes restantes
+        while (it.hasNext()) {
+            int expSiguiente = it.next();
+            int diff = expActual - expSiguiente;
+
+            // Multiplicar por x^(diferencia de exponentes)
+            for (int i = 0; i < diff; i++) {
+                resultado *= x;
+            }
+
+            // Sumar el coeficiente del siguiente término
+            resultado += terminos.get(expSiguiente);
+            expActual = expSiguiente;
+        }
+
+        // Multiplicar por x^(exponente del último término) para completar
+        // (si el último exponente es 0, esto no se ejecuta)
+        for (int i = 0; i < expActual; i++) {
+            resultado *= x;
+        }
+
+        return resultado;
+    }
+
+    /**
      * Añade un término al polinomio (agrupa términos semejantes).
      *
      * @param coeficiente Coeficiente del término

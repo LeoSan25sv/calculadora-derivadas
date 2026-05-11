@@ -15,6 +15,11 @@ public interface Funcion {
     Funcion derivar();
 
     /**
+     * Evalua en un punto
+     */
+    double evaluar(double x);
+
+    /**
      * Devuelve una representación en String de la función.
      *
      * @return String que representa la función

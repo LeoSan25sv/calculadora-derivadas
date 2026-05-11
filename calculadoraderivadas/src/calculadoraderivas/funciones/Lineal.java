@@ -47,6 +47,11 @@ public record Lineal(int m, int n) implements Funcion {
     }
 
     @Override
+    public double evaluar(double x) {
+        return m * x + n;
+    }
+
+    @Override
     public String toString() {
         if (n == 0) {
             return m + "x";

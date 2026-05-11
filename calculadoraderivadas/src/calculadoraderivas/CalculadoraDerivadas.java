@@ -31,5 +31,7 @@ public class CalculadoraDerivadas {
 
         Funcion df = f.derivar();
         ui.mostrarResultado(f, df);
+
+        ui.evaluar(f, df);
     }
 }

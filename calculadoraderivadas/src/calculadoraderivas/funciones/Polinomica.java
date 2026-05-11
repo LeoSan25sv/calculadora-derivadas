@@ -44,6 +44,11 @@ public class Polinomica implements Funcion {
     }
 
     @Override
+    public double evaluar(double x) {
+        return this.polinomio.evaluar(x);
+    }
+
+    @Override
     public String toString() {
         return polinomio.toString();
     }

@@ -1,5 +1,6 @@
 package calculadoraderivas;
 
+import calculadoraderivas.derivadas.DxPotencia;
 import calculadoraderivas.funciones.Lineal;
 import calculadoraderivas.funciones.Polinomica;
 import calculadoraderivas.funciones.Potencia;
@@ -72,13 +73,19 @@ public class InterfazUsuario {
      * @param df Derivada
      */
     public void mostrarResultado(Funcion f, Funcion df) {
-        System.out.println("\n==============================");
+        System.out.println("\n=====RESULTADO=====");
         System.out.println("f(x) = " + f);
+        System.out.println("f'(x) = " + df);
+        System.out.println("====================");
+    }
 
-        if (df instanceof Potencia p) {
-            System.out.println("f'(x) = " + p.derivadaToString());
-        } else {
-            System.out.println("f'(x) = " + df);
+    public void evaluar(Funcion funcion, Funcion derivada){
+        System.out.println("Quieres evaluar f(x) o f'(x)?");
+        int opcion = leerEntero("1 para f(x), 2 para f'(x), 0 para cancelar");
+        switch (opcion){
+            case 1 -> evaluarFuncion(funcion);
+            case 2 -> evaluarDerivada(derivada);
+            case 0 -> System.out.println("GRACIAS POR USAR NUESTRA CALCULADORA DE DERIVADAS!!!");
         }
     }
 
@@ -93,8 +100,6 @@ public class InterfazUsuario {
 
     private Funcion funcionPolinomio() {
         System.out.println("\n--- DERIVAR POLINOMIO ---\n");
-
-        scanner.nextLine();
 
         int numTerminos = leerEntero("Número de términos: ");
 
@@ -155,8 +160,6 @@ public class InterfazUsuario {
     }
     private Funcion funcionPotencia() {
         System.out.println("\n--- DERIVAR FUNCIÓN POTENCIA f(x) = u(x)^n ---\n");
-
-        scanner.nextLine();// 🔧 LIMPIAR EL BUFFER
 
         System.out.println("---- Paso 1: Introducir función interna u(x) ----");
 
@@ -225,5 +228,27 @@ public class InterfazUsuario {
         double valor = scanner.nextDouble();
         scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
         return valor;
+    }
+
+    private void evaluarDerivada(Funcion derivada) {
+        System.out.print("Introduzca x = ");
+        double x = scanner.nextDouble(); scanner.nextLine();
+        try {
+            double resultado = derivada.evaluar(x);
+            System.out.println("f'(" + x + ") = " + resultado);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void evaluarFuncion(Funcion funcion) {
+        System.out.print("Introduzca x = ");
+        double x = scanner.nextDouble(); scanner.nextLine();
+        try {
+            double resultado = funcion.evaluar(x);
+            System.out.println("f(" + x + ") = " + resultado);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

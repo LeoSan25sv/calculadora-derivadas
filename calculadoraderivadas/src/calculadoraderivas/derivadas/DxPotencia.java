@@ -25,9 +25,22 @@ public class DxPotencia implements Funcion {
 
     @Override
     public Funcion derivar() {
-        return null;
+        throw new UnsupportedOperationException(
+                "Segunda derivada de función potencia aún no implementada"
+        );
     }
 
+    @Override
+    public double evaluar(double x) {
+        double valorNumerico = exponente * Math.pow(this.base.evaluar(x), nuevoExponente) * this.du.evaluar(x);
+        return valorNumerico;
+    }
+
+
+    /**
+     * Devuelve la representación de la derivada en formato texto.
+     * Esto es necesario porque la derivada tiene la forma 'n·u^(n-1)·u'
+     */
     @Override
     public String toString(){
         return exponente + "[( " + base + ")^" + nuevoExponente + "] · (" + du + ")";

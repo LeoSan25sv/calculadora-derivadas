@@ -49,31 +49,19 @@ public class Potencia implements Funcion {
     }
 
     @Override
+    public double evaluar(double x) {
+        double valorNumerico = Math.pow(this.base.evaluar(x), exponente);
+        return valorNumerico;
+    }
+
+    /**
+     * Devuelve una representación de la función f(x) = u(x)^n
+     */
+    @Override
     public String toString() {
         if (exponente == 1) {
             return "(" + base + ")";
         }
         return "(" + base + ")^" + exponente;
-    }
-
-    /**
-     * Devuelve la representación de la derivada en formato texto.
-     * Esto es necesario porque la derivada tiene la forma 'n·u^(n-1)·u'
-     */
-    public String derivadaToString() {
-        Polinomio du = base.derivar();
-        int nuevoExp = exponente - 1;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(exponente);
-
-        if (nuevoExp == 1) {
-            sb.append("·(").append(base).append(")");
-        } else if (nuevoExp > 1) {
-            sb.append("·(").append(base).append(")^").append(nuevoExp);
-        }
-
-        sb.append("·(").append(du).append(")");
-        return sb.toString();
     }
 }

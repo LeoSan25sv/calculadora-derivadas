@@ -3,6 +3,7 @@ package calculadoraderivas.funciones;
 
 import calculadoraderivas.Funcion;
 import calculadoraderivas.Polinomio;
+import calculadoraderivas.derivadas.DxRacional;
 
 /**
  * Representa una función racional: f(x) = p(x)/q(x).
@@ -17,8 +18,8 @@ public class Racional implements Funcion {
     /**
      * Constructor de función racional.
      *
-     * @param numerador Funciones.derivadas.Polinomio del numerador
-     * @param denominador Funciones.derivadas.Polinomio del denominador
+     * @param numerador polinomio superior
+     * @param denominador polinomio inferior
      */
     public Racional(Polinomio numerador, Polinomio denominador) {
         this.numerador = numerador;
@@ -54,7 +55,12 @@ public class Racional implements Funcion {
         Polinomio nuevoNumerador = term1.restar(term2);
         Polinomio nuevoDenominador = denominador.multiplicar(denominador);
 
-        return new Racional(nuevoNumerador, nuevoDenominador);
+        return new DxRacional(nuevoNumerador, nuevoDenominador);
+    }
+
+    @Override
+    public double evaluar(double x) {
+        return this.numerador.evaluar(x) / this.denominador.evaluar(x);
     }
 
     @Override
