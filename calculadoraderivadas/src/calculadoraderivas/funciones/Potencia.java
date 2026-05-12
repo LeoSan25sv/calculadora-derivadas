@@ -8,7 +8,6 @@ import calculadoraderivas.derivadas.DxPotencia;
  * Representa una función potencia: f(x) = [u(x)]^n.
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class Potencia implements Funcion {
     private final Polinomio base;
@@ -50,8 +49,7 @@ public class Potencia implements Funcion {
 
     @Override
     public double evaluar(double x) {
-        double valorNumerico = Math.pow(this.base.evaluar(x), exponente);
-        return valorNumerico;
+        return Math.pow(this.base.evaluar(x), exponente);
     }
 
     /**

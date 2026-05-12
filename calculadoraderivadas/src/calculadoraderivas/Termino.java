@@ -4,7 +4,6 @@ package calculadoraderivas;
  * Representa un término de un polinomio: coeficiente * x^exponente
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class Termino {
     private int coeficiente;

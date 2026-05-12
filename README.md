@@ -16,8 +16,8 @@ Calculadora de derivadas simbólicas para calcular derivadas de funciones:
 - Regla de la potencia
 - Regla general de la potencia
 - Regla de la cadena
+- Derivación de Orden Superior  
 
-text
 
 ## 👨‍💻 Autor
 Leandro - Estudiante de Ingeniería Informática (Preparación UCI)

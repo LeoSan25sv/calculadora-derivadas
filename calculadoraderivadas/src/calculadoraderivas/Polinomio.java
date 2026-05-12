@@ -7,7 +7,6 @@ import java.util.*;
  * Los términos se agrupan automáticamente por exponente.
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class Polinomio {
     private final Map<Integer, Integer> terminos;  // exponente → coeficiente
