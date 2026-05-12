@@ -7,7 +7,6 @@ package calculadoraderivas;
  * Separa claramente la interfaz de usuario de la lógica de negocio.</p>
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class CalculadoraDerivadas {
 
@@ -32,6 +31,9 @@ public class CalculadoraDerivadas {
         Funcion df = f.derivar();
         ui.mostrarResultado(f, df);
 
-        ui.evaluar(f, df);
+        ui.menuSecundario();
+        int opcionSecundaria = ui.leerOpcion();
+
+        ui.llamarOpciones(opcionSecundaria, f, df);
     }
 }

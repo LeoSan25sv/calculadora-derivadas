@@ -4,7 +4,6 @@ package calculadoraderivas;
  * Interfaz que define el contrato para todas las funciones derivables.
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public interface Funcion {
     /**

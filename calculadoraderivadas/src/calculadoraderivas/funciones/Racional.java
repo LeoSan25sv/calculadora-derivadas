@@ -9,7 +9,6 @@ import calculadoraderivas.derivadas.DxRacional;
  * Representa una función racional: f(x) = p(x)/q(x).
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class Racional implements Funcion {
     private final Polinomio numerador;
@@ -45,7 +44,7 @@ public class Racional implements Funcion {
     public Polinomio getDenominador() { return denominador; }
 
     @Override
-    public Funcion derivar() {
+    public DxRacional derivar() {
         // Regla del cociente: (q·p' - p·q') / q²
         Polinomio dp = numerador.derivar();
         Polinomio dq = denominador.derivar();

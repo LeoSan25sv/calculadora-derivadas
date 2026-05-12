@@ -1,6 +1,5 @@
 package calculadoraderivas;
 
-import calculadoraderivas.derivadas.DxPotencia;
 import calculadoraderivas.funciones.Lineal;
 import calculadoraderivas.funciones.Polinomica;
 import calculadoraderivas.funciones.Potencia;
@@ -14,7 +13,6 @@ import java.util.Scanner;
  * Separada de la lógica de negocio.
  *
  * @author Estudiante UCI
- * @version 2.1 (POO)
  */
 public class InterfazUsuario {
     private final Scanner scanner;
@@ -76,15 +74,22 @@ public class InterfazUsuario {
         System.out.println("\n=====RESULTADO=====");
         System.out.println("f(x) = " + f);
         System.out.println("f'(x) = " + df);
-        System.out.println("====================");
+        System.out.println("=====================");
     }
 
-    public void evaluar(Funcion funcion, Funcion derivada){
-        System.out.println("Quieres evaluar f(x) o f'(x)?");
-        int opcion = leerEntero("1 para f(x), 2 para f'(x), 0 para cancelar");
+    public void menuSecundario(){
+        System.out.println("Ahora si lo desea, puede: ");
+        System.out.println("1. Evaluar f(x)");
+        System.out.println("2. Evaluar f'(x)");
+        System.out.println("3. Seguir derivando");
+        System.out.println("0. Terminar");
+    }
+
+    public void llamarOpciones(int opcion, Funcion f, Funcion df) {
         switch (opcion){
-            case 1 -> evaluarFuncion(funcion);
-            case 2 -> evaluarDerivada(derivada);
+            case 1 -> evaluarFuncion(f);
+            case 2 -> evaluarDerivada(df);
+            case 3 -> derivadasSucecivas(df);
             case 0 -> System.out.println("GRACIAS POR USAR NUESTRA CALCULADORA DE DERIVADAS!!!");
         }
     }
@@ -100,61 +105,18 @@ public class InterfazUsuario {
 
     private Funcion funcionPolinomio() {
         System.out.println("\n--- DERIVAR POLINOMIO ---\n");
-
-        int numTerminos = leerEntero("Número de términos: ");
-
-        if (numTerminos <= 0) {
-            System.out.println("Error: El número de términos debe ser positivo");
-            return null;
-        }
-
-        int[][] terminos = new int[numTerminos][2];
-        System.out.println("\nIntroduce cada término (constante exponente):");
-
-        for (int i = 0; i < numTerminos; i++) {
-            System.out.print("Término " + (i + 1) + ": ");
-            terminos[i][0] = scanner.nextInt();
-            terminos[i][1] = scanner.nextInt();
-        }
-
+        int[][] terminos = llenarValores();
         return new Polinomica(terminos);
     }
 
     private Funcion funcionRacional() {
-        System.out.println("\n--- DERIVAR FUNCIÓN RACIONAL ---\n");
+        System.out.println("\n--- DERIVAR FUNCIÓN RACIONAL f(x) = p(x) / q(x) ---\n");
 
-        System.out.println("---- Numerador p(x) ----");
-        int numP = leerEntero("Número de términos: ");
+        System.out.println("---- Paso 1: Construir Numerador p(x) ----");
+        int[][] pTerms = llenarValores();
 
-        if (numP <= 0) {
-            System.out.println("Error: El número de términos debe ser positivo");
-            return null;
-        }
-
-        int[][] pTerms = new int[numP][2];
-        System.out.println("Introduce cada término (constante exponente):");
-        for (int i = 0; i < numP; i++) {
-            System.out.print("Término " + (i + 1) + ": ");
-            pTerms[i][0] = scanner.nextInt();
-            pTerms[i][1] = scanner.nextInt();
-        }
-
-        System.out.println("\n---- Denominador q(x) ----");
-        System.out.print("Número de términos: ");
-        int numQ = scanner.nextInt();
-
-        if (numQ <= 0) {
-            System.out.println("Error: El número de términos debe ser positivo");
-            return null;
-        }
-
-        int[][] qTerms = new int[numQ][2];
-        System.out.println("Introduce cada término (constante exponente):");
-        for (int i = 0; i < numQ; i++) {
-            System.out.print("Término " + (i + 1) + ": ");
-            qTerms[i][0] = scanner.nextInt();
-            qTerms[i][1] = scanner.nextInt();
-        }
+        System.out.println("\n---- Paso 2: Construir Denominador q(x) ----");
+        int[][] qTerms = llenarValores();
 
         return new Racional(pTerms, qTerms);
     }
@@ -162,18 +124,74 @@ public class InterfazUsuario {
         System.out.println("\n--- DERIVAR FUNCIÓN POTENCIA f(x) = u(x)^n ---\n");
 
         System.out.println("---- Paso 1: Introducir función interna u(x) ----");
+        int[][] uTerms = llenarValores();
 
-        ArrayList<Integer> constante = new ArrayList<>();
-        ArrayList<Integer> exponente = new ArrayList<>();
+        System.out.print("\n---- Paso 2: Introducir exponente n ----");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+        return new Potencia(uTerms, n);
+    }
+
+    // ========== MÉTODOS AUXILIARES ==========
+    private int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        int valor = scanner.nextInt();
+        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
+        return valor;
+    }
+
+    private double leerDouble(String mensaje) {
+        System.out.print(mensaje);
+        double valor = scanner.nextDouble();
+        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
+        return valor;
+    }
+
+    private void evaluarFuncion(Funcion funcion) {
+        System.out.println("Para evaluar f(x)");
+        System.out.print("Introduzca x = ");
+        double x = scanner.nextDouble(); scanner.nextLine();
+        try {
+            double resultado = funcion.evaluar(x);
+            System.out.println("f(" + x + ") = " + resultado);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void evaluarDerivada(Funcion derivada) {
+        System.out.println("Para evaluar f'(x)?");
+        System.out.print("Introduzca x = ");
+        double x = scanner.nextDouble(); scanner.nextLine();
+        try {
+            double resultado = derivada.evaluar(x);
+            System.out.println("f'(" + x + ") = " + resultado);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void derivadasSucecivas(Funcion f){
+        System.out.println("--- Derivación Sucesiva ---");
+        int orden = leerEntero("¿Qué orden de derivada? ");
+        Funcion derivadaActual = f;
+        for (int i = 1; i < orden; i++) {
+            derivadaActual = derivadaActual.derivar();
+        }
+        System.out.println("f^(" + orden + ")(x) = " + derivadaActual);
+    }
+
+    private int[][] llenarValores(){
+        ArrayList<Integer> constantes = new ArrayList<>();
+        ArrayList<Integer> exponentes = new ArrayList<>();
 
         System.out.println("Introduce cada término (constante exponente):");
         System.out.println("Para terminar introduzca: (0 0)");
-
         while (true) {
             String termino = scanner.nextLine().trim(); //representa a_n ^n
 
             if (termino.equals("0 0")) break;
-
             int espacioIndex = termino.indexOf(' ');
             if (espacioIndex == -1) {
                 System.out.println("Formato incorrecto. Usa: constante exponente");
@@ -189,66 +207,23 @@ public class InterfazUsuario {
 
                 if (cons == 0 && exp == 0) break;
 
-                constante.add(cons);
-                exponente.add(exp);
+                constantes.add(cons);
+                exponentes.add(exp);
 
             } catch (NumberFormatException e) {
                 System.out.println("Error: " + termino + " no es válido. Usa números.");
             }
         }
-
         // Verificar que al menos hay un término
-        if (constante.isEmpty()) {
+        if (constantes.isEmpty()) {
             throw new IllegalStateException("No se ingresaron términos válidos");
         }
 
-        int[][] uTerms = new int[constante.size()][2];
-        for (int i = 0; i < constante.size(); i++) {
-            uTerms[i][0] = constante.get(i);
-            uTerms[i][1] = exponente.get(i);
+        int[][] terms = new int[constantes.size()][2];
+        for (int i = 0; i < constantes.size(); i++) {
+            terms[i][0] = constantes.get(i);
+            terms[i][1] = exponentes.get(i);
         }
-
-        System.out.print("\n---- Paso 2: Introducir exponente n ----");
-        int n = scanner.nextInt();
-        scanner.nextLine(); // ← limpiar el buffer DESPUÉS de leer el número
-
-        return new Potencia(uTerms, n);
-    }
-
-    // metodos auxiliares
-    private int leerEntero(String mensaje) {
-        System.out.print(mensaje);
-        int valor = scanner.nextInt();
-        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
-        return valor;
-    }
-
-    private double leerDouble(String mensaje) {
-        System.out.print(mensaje);
-        double valor = scanner.nextDouble();
-        scanner.nextLine();  // ← LIMPIEZA AUTOMÁTICA
-        return valor;
-    }
-
-    private void evaluarDerivada(Funcion derivada) {
-        System.out.print("Introduzca x = ");
-        double x = scanner.nextDouble(); scanner.nextLine();
-        try {
-            double resultado = derivada.evaluar(x);
-            System.out.println("f'(" + x + ") = " + resultado);
-        } catch (ArithmeticException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private void evaluarFuncion(Funcion funcion) {
-        System.out.print("Introduzca x = ");
-        double x = scanner.nextDouble(); scanner.nextLine();
-        try {
-            double resultado = funcion.evaluar(x);
-            System.out.println("f(" + x + ") = " + resultado);
-        } catch (ArithmeticException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        return terms;
     }
 }
