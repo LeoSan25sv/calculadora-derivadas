@@ -1,9 +1,9 @@
-package calculadoraderivas.funciones;
+package com.tucalculadora.funciones;
 
 
-import calculadoraderivas.Funcion;
-import calculadoraderivas.Polinomio;
-import calculadoraderivas.derivadas.DxRacional;
+import com.tucalculadora.Funcion;
+import com.tucalculadora.Polinomio;
+import com.tucalculadora.derivadas.DxRacional;
 
 /**
  * Representa una función racional: f(x) = p(x)/q(x).

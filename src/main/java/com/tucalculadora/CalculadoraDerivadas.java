@@ -1,4 +1,4 @@
-package calculadoraderivas;
+package com.tucalculadora;
 
 /**
  * Calculadora de Derivadas - Versión Orientada a Objetos.
@@ -34,6 +34,6 @@ public class CalculadoraDerivadas {
         ui.menuSecundario();
         int opcionSecundaria = ui.leerOpcion();
 
-        ui.llamarOpciones(opcionSecundaria, f, df);
+        ui.llamarOpcionesSecundarias(opcionSecundaria, f, df);
     }
 }

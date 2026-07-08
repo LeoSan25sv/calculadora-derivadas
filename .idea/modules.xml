@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/Calculadora de Derivadas con POO.iml" filepath="$PROJECT_DIR$/Calculadora de Derivadas con POO.iml" />
-      <module fileurl="file://$PROJECT_DIR$/calculadoraderivadas/calculadoraderivadas.iml" filepath="$PROJECT_DIR$/calculadoraderivadas/calculadoraderivadas.iml" />
-    </modules>
-  </component>
-</project>

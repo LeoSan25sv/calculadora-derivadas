@@ -1,8 +1,8 @@
-package calculadoraderivas.funciones;
+package com.tucalculadora.funciones;
 
 
-import calculadoraderivas.Funcion;
-import calculadoraderivas.Polinomio;
+import com.tucalculadora.Funcion;
+import com.tucalculadora.Polinomio;
 
 /**
  * Representa una función polinómica: f(x) = Σ a_i·x^i.

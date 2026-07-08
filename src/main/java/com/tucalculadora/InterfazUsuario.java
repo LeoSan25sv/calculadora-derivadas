@@ -1,10 +1,9 @@
-package calculadoraderivas;
+package com.tucalculadora;
 
-import calculadoraderivas.funciones.Lineal;
-import calculadoraderivas.funciones.Polinomica;
-import calculadoraderivas.funciones.Potencia;
-import calculadoraderivas.funciones.Racional;
-
+import com.tucalculadora.funciones.Lineal;
+import com.tucalculadora.funciones.Polinomica;
+import com.tucalculadora.funciones.Potencia;
+import com.tucalculadora.funciones.Racional;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class InterfazUsuario {
 
     /**
      *
-     * Constructor de la clase
+     * Constructor de una InterfazUsuario
      *
      */
     public InterfazUsuario() {
@@ -28,7 +27,7 @@ public class InterfazUsuario {
 
     /**
      *
-     * Metodo de instancia para mostrar menú
+     * Metodo para mostrar menú principal de la calculadora
      *
      */
     public void mostrarMenu() {
@@ -41,11 +40,19 @@ public class InterfazUsuario {
     }
 
     /**
-     * Metodo de instancia para tomar entrada de Usuario con la opción deseada
-     * @return Número de la opcion deseada
+     * Metodo para tomar entrada de Usuario con la opción deseada
+     * @return Número de la opción deseada
      */
     public int leerOpcion() {
-        return leerEntero("Introduzca el número correspondiente a la opción deseada: ");
+        try {
+            int option = leerEntero("Introduzca el número correspondiente a la opción deseada: ");
+            if (option < 1 || option > 4)
+                throw new IllegalArgumentException("Opción fuera de rango");
+            else return option;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Intentalo nuevamente");
+            return leerOpcion();
+        }
     }
 
     /**
@@ -77,6 +84,9 @@ public class InterfazUsuario {
         System.out.println("=====================");
     }
 
+    /**
+     * Muestra un menú con opciones secundarias para continuar con el programa
+     */
     public void menuSecundario(){
         System.out.println("Ahora si lo desea, puede: ");
         System.out.println("1. Evaluar f(x)");
@@ -85,7 +95,14 @@ public class InterfazUsuario {
         System.out.println("0. Terminar");
     }
 
-    public void llamarOpciones(int opcion, Funcion f, Funcion df) {
+    /**
+     * Ejecuta la opción deseada por el usuario
+     *
+     * @param opcion (0-3), 0 para cerrar el programa
+     * @param f función para evaluar o derivar
+     * @param df derivada para evaluar o seguir derivando
+     */
+    public void llamarOpcionesSecundarias(int opcion, Funcion f, Funcion df) {
         switch (opcion){
             case 1 -> evaluarFuncion(f);
             case 2 -> evaluarDerivada(df);

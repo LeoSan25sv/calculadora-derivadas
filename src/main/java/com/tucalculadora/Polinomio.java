@@ -1,4 +1,4 @@
-package calculadoraderivas;
+package com.tucalculadora;
 
 import java.util.*;
 
@@ -45,7 +45,7 @@ public class Polinomio {
     /**
      * Evalúa el polinomio en un punto x usando el algoritmo de Horner.
      *
-     * @param x Valor en el que evaluar
+     * @param x Valor en el que evaluar, debe ser double
      * @return Resultado de la evaluación
      */
     public double evaluar(double x) {

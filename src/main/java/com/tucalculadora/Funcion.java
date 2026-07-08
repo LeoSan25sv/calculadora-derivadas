@@ -1,4 +1,4 @@
-package calculadoraderivas;
+package com.tucalculadora;
 
 /**
  * Interfaz que define el contrato para todas las funciones derivables.

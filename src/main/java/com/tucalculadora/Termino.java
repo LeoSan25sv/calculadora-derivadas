@@ -1,4 +1,4 @@
-package calculadoraderivas;
+package com.tucalculadora;
 
 /**
  * Representa un término de un polinomio: coeficiente * x^exponente

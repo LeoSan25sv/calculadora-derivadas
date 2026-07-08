@@ -1,8 +1,8 @@
-package calculadoraderivas.derivadas;
+package com.tucalculadora.derivadas;
 
 
-import calculadoraderivas.Funcion;
-import calculadoraderivas.Polinomio;
+import com.tucalculadora.Funcion;
+import com.tucalculadora.Polinomio;
 
 public class DxPotencia implements Funcion {
     final Polinomio base;

@@ -1,8 +1,7 @@
-package calculadoraderivas.derivadas;
+package com.tucalculadora.derivadas;
 
-import calculadoraderivas.Funcion;
-import calculadoraderivas.Polinomio;
-import calculadoraderivas.funciones.Racional;
+import com.tucalculadora.Funcion;
+import com.tucalculadora.Polinomio;
 
 public class DxRacional implements Funcion {
     private Polinomio numerador;

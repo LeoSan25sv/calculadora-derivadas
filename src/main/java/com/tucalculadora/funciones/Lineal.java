@@ -1,8 +1,8 @@
-package calculadoraderivas.funciones;
+package com.tucalculadora.funciones;
 
 
-import calculadoraderivas.Funcion;
-import calculadoraderivas.Polinomio;
+import com.tucalculadora.Funcion;
+import com.tucalculadora.Polinomio;
 
 /**
  * Representa una función lineal de la forma f(x) = mx + n.
