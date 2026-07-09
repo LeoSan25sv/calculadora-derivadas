@@ -61,14 +61,38 @@ public class NodoPotencia extends NodoExpresion {
     }
 
     @Override
-    void printStackCommands() {
-        base.printStackCommands();
-        exponente.printStackCommands();
-        System.out.println("  Operator ^");
+    public String toLaTeX() {
+        String baseStr = base.toLaTeX();
+        String expStr = exponente.toLaTeX();
+
+        // Si el exponente es 1, no mostrar ^1
+        if (exponente instanceof NodoConstante && ((NodoConstante) exponente).number == 1) {
+            return baseStr;
+        }
+
+        // Si el exponente es 0, x^0 = 1
+        if (exponente instanceof NodoConstante && ((NodoConstante) exponente).number == 0) {
+            return "1";
+        }
+
+        // Si la base es simple (variable o número), no poner paréntesis
+        if (base instanceof NodoVariable || base instanceof NodoConstante) {
+            return baseStr + "^{" + expStr + "}";
+        }
+
+        // Si la base es compleja, poner paréntesis
+        return "(" + baseStr + ")^{" + expStr + "}";
     }
 
     @Override
     public String toString() {
         return "( " + base + " ^ " + exponente + " )";
+    }
+
+    @Override
+    public void printStackCommands() {
+        base.printStackCommands();
+        exponente.printStackCommands();
+        System.out.println("  Operator ^");
     }
 }

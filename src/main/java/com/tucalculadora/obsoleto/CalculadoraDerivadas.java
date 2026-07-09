@@ -1,4 +1,4 @@
-package com.tucalculadora;
+package com.tucalculadora.obsoleto;
 
 /**
  * Calculadora de Derivadas - Versión Orientada a Objetos.

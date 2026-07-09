@@ -1,8 +1,7 @@
-package com.tucalculadora.funciones;
+package com.tucalculadora.obsoleto.funciones;
 
 
-import com.tucalculadora.Funcion;
-import com.tucalculadora.Polinomio;
+import com.tucalculadora.obsoleto.Funcion;
 
 /**
  * Representa una función lineal de la forma f(x) = mx + n.

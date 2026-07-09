@@ -1,8 +1,7 @@
-package com.tucalculadora.funciones;
+package com.tucalculadora.obsoleto.funciones;
 
-import com.tucalculadora.Funcion;
-import com.tucalculadora.Polinomio;
-import com.tucalculadora.derivadas.DxPotencia;
+import com.tucalculadora.obsoleto.Funcion;
+import com.tucalculadora.obsoleto.derivadas.DxPotencia;
 
 /**
  * Representa una función potencia: f(x) = [u(x)]^n.
