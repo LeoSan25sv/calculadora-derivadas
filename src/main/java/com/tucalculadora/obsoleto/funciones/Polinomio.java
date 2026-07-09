@@ -1,4 +1,6 @@
-package com.tucalculadora;
+package com.tucalculadora.obsoleto.funciones;
+
+import com.tucalculadora.obsoleto.Termino;
 
 import java.util.*;
 

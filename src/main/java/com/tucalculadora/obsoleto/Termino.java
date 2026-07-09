@@ -1,4 +1,4 @@
-package com.tucalculadora;
+package com.tucalculadora.obsoleto;
 
 /**
  * Representa un término de un polinomio: coeficiente * x^exponente

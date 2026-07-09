@@ -1,4 +1,4 @@
-package com.tucalculadora;
+package com.tucalculadora.obsoleto;
 
 /**
  * Interfaz que define el contrato para todas las funciones derivables.

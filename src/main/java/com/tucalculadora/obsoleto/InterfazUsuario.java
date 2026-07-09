@@ -1,9 +1,9 @@
-package com.tucalculadora;
+package com.tucalculadora.obsoleto;
 
-import com.tucalculadora.funciones.Lineal;
-import com.tucalculadora.funciones.Polinomica;
-import com.tucalculadora.funciones.Potencia;
-import com.tucalculadora.funciones.Racional;
+import com.tucalculadora.obsoleto.funciones.Lineal;
+import com.tucalculadora.obsoleto.funciones.Polinomica;
+import com.tucalculadora.obsoleto.funciones.Potencia;
+import com.tucalculadora.obsoleto.funciones.Racional;
 import java.util.ArrayList;
 import java.util.Scanner;
 

@@ -1,9 +1,8 @@
-package com.tucalculadora.funciones;
+package com.tucalculadora.obsoleto.funciones;
 
 
-import com.tucalculadora.Funcion;
-import com.tucalculadora.Polinomio;
-import com.tucalculadora.derivadas.DxRacional;
+import com.tucalculadora.obsoleto.Funcion;
+import com.tucalculadora.obsoleto.derivadas.DxRacional;
 
 /**
  * Representa una función racional: f(x) = p(x)/q(x).
